@@ -1,0 +1,72 @@
+  
+ MySQL  localhost:33060+ ssl  d16  SQL > select * from employee;
++----+---------+-----+--------+--------------+
+| id | name    | age | salary | department   |
++----+---------+-----+--------+--------------+
+|  1 | bhaskar |  22 |  80000 | data         |
+|  2 | venkat  |  24 |  70000 | data analyst |
+|  3 | deep    |  23 |  60000 | data science |
+|  4 | bd      |  23 |  50000 | science      |
+|  5 | raju    |  27 |  90000 | FSD          |
+|  6 | ravi    |  47 |  50000 | PFSD         |
+|  7 | ramu    |  60 | 200000 | business     |
+|  8 | Ammu    |  25 |  80000 | java         |
+|  9 | rishi   |  19 |  25000 | BPO          |
+| 10 | Karthik |  22 |  10000 | sales        |
++----+---------+-----+--------+--------------+
+10 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL > select upper(name) from employee;
++-------------+
+| upper(name) |
++-------------+
+| BHASKAR     |
+| VENKAT      |
+| DEEP        |
+| BD          |
+| RAJU        |
+| RAVI        |
+| RAMU        |
+| AMMU        |
+| RISHI       |
+| KARTHIK     |
++-------------+
+10 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL > select substr(name,1,3) from employee;
++------------------+
+| substr(name,1,3) |
++------------------+
+| bha              |
+| ven              |
+| dee              |
+| bd               |
+| raj              |
+| rav              |
+| ram              |
+| Amm              |
+| ris              |
+| Kar              |
++------------------+
+10 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL > update employee set name=replace(name,"bhaskar","bhaskar123");
+Query OK, 10 rows affected (0.0153 sec)
+
+Rows matched: 10  Changed: 1  Warnings: 0
+ MySQL  localhost:33060+ ssl  d16  SQL > select * from employee;
++----+------------+-----+--------+--------------+
+| id | name       | age | salary | department   |
++----+------------+-----+--------+--------------+
+|  1 | bhaskar123 |  22 |  80000 | data         |
+|  2 | venkat     |  24 |  70000 | data analyst |
+|  3 | deep       |  23 |  60000 | data science |
+|  4 | bd         |  23 |  50000 | science      |
+|  5 | raju       |  27 |  90000 | FSD          |
+|  6 | ravi       |  47 |  50000 | PFSD         |
+|  7 | ramu       |  60 | 200000 | business     |
+|  8 | Ammu       |  25 |  80000 | java         |
+|  9 | rishi      |  19 |  25000 | BPO          |
+| 10 | Karthik    |  22 |  10000 | sales        |
++----+------------+-----+--------+--------------+
+10 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL >
+
+
