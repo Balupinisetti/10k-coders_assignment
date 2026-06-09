@@ -1,0 +1,44 @@
+ select * from employee;
++----+---------+-----+--------+--------------+
+| id | name    | age | salary | department   |
++----+---------+-----+--------+--------------+
+|  1 | bhaskar |  22 |  80000 | data         |
+|  2 | balu    |  24 |  70000 | data analyst |
+|  3 | deep    |  23 |  60000 | data science |
+|  4 | bd      |  23 |  50000 | science      |
+|  5 | raju    |  27 |  90000 | FSD          |
+|  6 | ravi    |  47 |  50000 | PFSD         |
+|  7 | ramu    |  60 | 200000 | business     |
+|  8 | Ammu    |  25 |  80000 | java         |
+|  9 | rishi   |  19 |  25000 | BPO          |
+| 10 | Karthik |  22 |  10000 | sales        |
++----+---------+-----+--------+--------------+
+10 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL > select * from employee where salary > 50000;
++----+---------+-----+--------+--------------+
+| id | name    | age | salary | department   |
++----+---------+-----+--------+--------------+
+|  1 | bhaskar |  22 |  80000 | data         |
+|  2 | balu    |  24 |  70000 | data analyst |
+|  3 | deep    |  23 |  60000 | data science |
+|  5 | raju    |  27 |  90000 | FSD          |
+|  7 | ramu    |  60 | 200000 | business     |
+|  8 | Ammu    |  25 |  80000 | java         |
++----+---------+-----+--------+--------------+
+6 rows in set (0.0012 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL > select * from employee where age between 25 and 40;
++----+------+-----+--------+------------+
+| id | name | age | salary | department |
++----+------+-----+--------+------------+
+|  5 | raju |  27 |  90000 | FSD        |
+|  8 | Ammu |  25 |  80000 | java       |
++----+------+-----+--------+------------+
+2 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL > select * from employee where department="sales" and salary < 60000;
++----+---------+-----+--------+------------+
+| id | name    | age | salary | department |
++----+---------+-----+--------+------------+
+| 10 | Karthik |  22 |  10000 | sales      |
++----+---------+-----+--------+------------+
+1 row in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL >
