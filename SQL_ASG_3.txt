@@ -1,0 +1,134 @@
+
+ MySQL  localhost:33060+ ssl  d16  SQL > select * from departments;
++---------+---------+
+| Dept_id | name    |
++---------+---------+
+|       1 | IT      |
+|       2 | HR      |
+|       3 | Sales   |
+|       4 | Finance |
++---------+---------+
+4 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL > select * from employees;
++--------+-------+---------+----------+
+| Emp_id | name  | Dept_id | salary   |
++--------+-------+---------+----------+
+|    101 | Ravi  |       1 | 50000.00 |
+|    102 | Priya |       2 | 45000.00 |
+|    103 | Arjun |       1 | 60000.00 |
+|    104 | Sneha |       4 | 55000.00 |
+|    105 | Kiran |    NULL | 65000.00 |
++--------+-------+---------+----------+
+5 rows in set (0.0012 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL > desc projects;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| project_id | int         | NO   | PRI | NULL    |       |
+| name       | varchar(50) | YES  |     | NULL    |       |
+| dept_id    | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0053 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL > insert into projects values(1,"CRM System",1),(2,"Recruitment Portal",2),(3,"Payroll System",3),(4,"sales Dashboard",4),(5,"Inventory App",null);
+Query OK, 5 rows affected (0.0523 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+ MySQL  localhost:33060+ ssl  d16  SQL > select * from projects;
++------------+--------------------+---------+
+| project_id | name               | dept_id |
++------------+--------------------+---------+
+|          1 | CRM System         |       1 |
+|          2 | Recruitment Portal |       2 |
+|          3 | Payroll System     |       3 |
+|          4 | sales Dashboard    |       4 |
+|          5 | Inventory App      |    NULL |
++------------+--------------------+---------+
+5 rows in set (0.0009 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL > select * from employees inner join departments on employees.Dept_id=departments.Dept_id;
++--------+-------+---------+----------+---------+---------+
+| Emp_id | name  | Dept_id | salary   | Dept_id | name    |
++--------+-------+---------+----------+---------+---------+
+|    101 | Ravi  |       1 | 50000.00 |       1 | IT      |
+|    102 | Priya |       2 | 45000.00 |       2 | HR      |
+|    103 | Arjun |       1 | 60000.00 |       1 | IT      |
+|    104 | Sneha |       4 | 55000.00 |       4 | Finance |
++--------+-------+---------+----------+---------+---------+
+4 rows in set (0.0016 sec)
+select * from employees left join departments on employees.Dept_id=departments.Dept_id;
++--------+-------+---------+----------+---------+---------+
+| Emp_id | name  | Dept_id | salary   | Dept_id | name    |
++--------+-------+---------+----------+---------+---------+
+|    101 | Ravi  |       1 | 50000.00 |       1 | IT      |
+|    102 | Priya |       2 | 45000.00 |       2 | HR      |
+|    103 | Arjun |       1 | 60000.00 |       1 | IT      |
+|    104 | Sneha |       4 | 55000.00 |       4 | Finance |
+|    105 | Kiran |    NULL | 65000.00 |    NULL | NULL    |
++--------+-------+---------+----------+---------+---------+
+select * from employees right join departments on employees.Dept_id=departments.Dept_id;
++--------+-------+---------+----------+---------+---------+
+| Emp_id | name  | Dept_id | salary   | Dept_id | name    |
++--------+-------+---------+----------+---------+---------+
+|    103 | Arjun |       1 | 60000.00 |       1 | IT      |
+|    101 | Ravi  |       1 | 50000.00 |       1 | IT      |
+|    102 | Priya |       2 | 45000.00 |       2 | HR      |
+|   NULL | NULL  |    NULL |     NULL |       3 | Sales   |
+|    104 | Sneha |       4 | 55000.00 |       4 | Finance |
++--------+-------+---------+----------+---------+---------+
+select * from employees where Dept_id is null;
++--------+-------+---------+----------+
+| Emp_id | name  | Dept_id | salary   |
++--------+-------+---------+----------+
+|    105 | Kiran |    NULL | 65000.00 |
++--------+-------+---------+----------+
+select * from departments inner join projects on departments.Dept_id=projects.Dept_id;
++---------+---------+------------+--------------------+---------+
+| Dept_id | name    | project_id | name               | dept_id |
++---------+---------+------------+--------------------+---------+
+|       1 | IT      |          1 | CRM System         |       1 |
+|       2 | HR      |          2 | Recruitment Portal |       2 |
+|       3 | Sales   |          3 | Payroll System     |       3 |
+|       4 | Finance |          4 | sales Dashboard    |       4 |
++---------+---------+------------+--------------------+---------+
+select * from projects left join departments on projects.Dept_id=departments.Dept_id;
++------------+--------------------+---------+---------+---------+
+| project_id | name               | dept_id | Dept_id | name    |
++------------+--------------------+---------+---------+---------+
+|          1 | CRM System         |       1 |       1 | IT      |
+|          2 | Recruitment Portal |       2 |       2 | HR      |
+|          3 | Payroll System     |       3 |       3 | Sales   |
+|          4 | sales Dashboard    |       4 |       4 | Finance |
+|          5 | Inventory App      |    NULL |    NULL | NULL    |
++------------+--------------------+---------+---------+---------+
+select * from projects join departments join employees on projects.Dept_id=departments.Dept_id=employees.Dept_id;
++------------+--------------------+---------+---------+---------+--------+-------+---------+----------+
+| project_id | name               | dept_id | Dept_id | name    | Emp_id | name  | Dept_id | salary   |
++------------+--------------------+---------+---------+---------+--------+-------+---------+----------+
+|          4 | sales Dashboard    |       4 |       4 | Finance |    101 | Ravi  |       1 | 50000.00 |
+|          3 | Payroll System     |       3 |       3 | Sales   |    101 | Ravi  |       1 | 50000.00 |
+|          2 | Recruitment Portal |       2 |       2 | HR      |    101 | Ravi  |       1 | 50000.00 |
+|          1 | CRM System         |       1 |       1 | IT      |    101 | Ravi  |       1 | 50000.00 |
+|          4 | sales Dashboard    |       4 |       4 | Finance |    103 | Arjun |       1 | 60000.00 |
+|          3 | Payroll System     |       3 |       3 | Sales   |    103 | Arjun |       1 | 60000.00 |
+|          2 | Recruitment Portal |       2 |       2 | HR      |    103 | Arjun |       1 | 60000.00 |
+|          1 | CRM System         |       1 |       1 | IT      |    103 | Arjun |       1 | 60000.00 |
++------------+--------------------+---------+---------+---------+--------+-------+---------+----------+
+select * from employees where Dept_id is null;
++--------+-------+---------+----------+
+| Emp_id | name  | Dept_id | salary   |
++--------+-------+---------+----------+
+|    105 | Kiran |    NULL | 65000.00 |
++--------+-------+---------+----------+
+ select dept_id ,name from departments where Dept_id not in (select Dept_id from employees);
+Empty set (0.0026 sec)
+select * from employees e1 join employees e2 on e1.name=e2.name;
++--------+-------+---------+----------+--------+-------+---------+----------+
+| Emp_id | name  | Dept_id | salary   | Emp_id | name  | Dept_id | salary   |
++--------+-------+---------+----------+--------+-------+---------+----------+
+|    101 | Ravi  |       1 | 50000.00 |    101 | Ravi  |       1 | 50000.00 |
+|    102 | Priya |       2 | 45000.00 |    102 | Priya |       2 | 45000.00 |
+|    103 | Arjun |       1 | 60000.00 |    103 | Arjun |       1 | 60000.00 |
+|    104 | Sneha |       4 | 55000.00 |    104 | Sneha |       4 | 55000.00 |
+|    105 | Kiran |    NULL | 65000.00 |    105 | Kiran |    NULL | 65000.00 |
++--------+-------+---------+----------+--------+-------+---------+----------+
+5 rows in set (0.0015 sec)
+ MySQL  localhost:33060+ ssl  d16  SQL >
